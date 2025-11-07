@@ -42,7 +42,7 @@ Each entry in the database includes the original variables and their predicted h
 
 The connection and data insertion process were implemented using the mysql.connector library, ensuring reliable transactions and efficient communication between the Python application and the MySQL server.
 
-🔬 Phase 5: Results and Conclusions
+### *🔬 Phase 5: Results and Conclusions*
 
 The multivariable linear model successfully identified significant relationships between social, economic, and health-related variables and national happiness levels.
 

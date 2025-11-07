@@ -1,4 +1,4 @@
-## *🤖 Machine Learning Project: Global Happiness Prediction (2015–2019)*
+##*🤖 Machine Learning Project: Global Happiness Prediction (2015–2019)*
 
 This project focuses on the development of a Machine Learning model based on a multivariable linear statistical approach to predict the happiness level of different countries worldwide. The dataset comes from the World Happiness Report, supported by the Sustainable Development Solutions Network (SDSN), and includes information from the years 2015 to 2019.
 

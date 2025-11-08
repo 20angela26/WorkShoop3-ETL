@@ -7,9 +7,7 @@ import pandas as pd
 from dotenv import load_dotenv
 import os
 
-# ===============================================================
-# 🔧 CONFIGURACIÓN
-# ===============================================================
+
 load_dotenv()
 
 db = mysql.connector.connect(
@@ -20,9 +18,7 @@ db = mysql.connector.connect(
 )
 cursor = db.cursor()
 
-# ===============================================================
-# 🧠 CARGAR MODELO
-# ===============================================================
+
 try:
     modelo_nombre = "modelo_felicidad.pkl"
     model = joblib.load(f"../Model/{modelo_nombre}")
@@ -31,9 +27,7 @@ except Exception as e:
     print(f"❌ Error al cargar el modelo: {e}")
     exit()
 
-# ===============================================================
-# 🔌 KAFKA CONSUMER
-# ===============================================================
+
 consumer = KafkaConsumer(
     'topico_felicidad',
     bootstrap_servers=['localhost:9092'],
@@ -45,9 +39,6 @@ consumer = KafkaConsumer(
 
 print("🟢 Consumer conectado a Kafka y MySQL. Esperando datos...\n")
 
-# ===============================================================
-# 🚀 PROCESAR MENSAJES
-# ===============================================================
 for msg in consumer:
     data = msg.value
     ts = datetime.now()
@@ -61,9 +52,7 @@ for msg in consumer:
         if data.get(campo) in [None, "", "NaN"]:
             data[campo] = 0.0
 
-    # ===============================================================
-    # 1️⃣ Guardar datos reales
-    # ===============================================================
+
     cursor.execute("""
         INSERT INTO staging_felicidad (
             country, year, happiness_rank, happiness_score, gdp_per_capita,
@@ -88,9 +77,7 @@ for msg in consumer:
     ))
     db.commit()
 
-    # ===============================================================
-    # 2️⃣ Generar predicción
-    # ===============================================================
+  
     try:
         X_df = pd.DataFrame([{
             'GDP per Capita': data["GDP per Capita"],
@@ -107,9 +94,7 @@ for msg in consumer:
         print(f"⚠️ Error al predecir {data['Country']} ({data['Year']}): {e}")
         continue
 
-    # ===============================================================
-    # 3️⃣ Guardar predicción
-    # ===============================================================
+   
     cursor.execute("""
         INSERT INTO prediccion_felicidad (
             country, year, modelo_nombre, happiness_score_predicho,
@@ -128,9 +113,7 @@ for msg in consumer:
     ))
     db.commit()
 
-    # ===============================================================
-    # 4️⃣ Guardar comparación
-    # ===============================================================
+
     cursor.execute("""
         INSERT INTO comparacion_felicidad (
             country, year, modelo_nombre,
@@ -147,9 +130,7 @@ for msg in consumer:
     ))
     db.commit()
 
-    # ===============================================================
-    # 5️⃣ Mostrar resultados
-    # ===============================================================
+
     diferencia = pred - data["Happiness Score"]
     print(f"[{ts.strftime('%Y-%m-%d %H:%M:%S')}] ✅ {data['Country']} ({data['Year']}) "
             f"Modelo: {modelo_nombre} | Real: {data['Happiness Score']:.3f} | "

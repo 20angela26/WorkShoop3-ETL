@@ -1,0 +1,2 @@
+Model,Method,R_squared,Adj_R_squared,F_statistic,Prob_F,Log_Likelihood,No_Observations,Df_Residuals,Df_Model,AIC,BIC
+OLS,Least Squares,0.968835,0.954095,65.730000,4.47e-208,105.360000,546,370,175,141.280000,898.540000

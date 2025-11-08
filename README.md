@@ -3,6 +3,8 @@
 This project focuses on the development of a Machine Learning model based on a multivariable linear statistical approach to predict the happiness level of different countries worldwide. The dataset comes from the World Happiness Report, supported by the Sustainable Development Solutions Network (SDSN), and includes information from the years 2015 to 2019.
 
 The main objective of this work is not only to build a predictive model but also to demonstrate how it can be integrated into a real-time data pipeline using Apache Kafka, with results stored in a relational MySQL database. This end-to-end architecture combines data analysis, machine learning, and data engineering into a complete predictive system.
+<img width="817" height="501" alt="image" src="https://github.com/user-attachments/assets/0606bfcb-ca9a-4938-a958-a4fbb59bae1c" />
+
 
 ### *🧩 Phase 1: Exploratory Data Analysis (EDA)*
 

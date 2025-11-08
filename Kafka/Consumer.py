@@ -32,9 +32,8 @@ consumer = KafkaConsumer(
     'topico_felicidad',
     bootstrap_servers=['localhost:9092'],
     value_deserializer=lambda x: json.loads(x.decode('utf-8')),
-    auto_offset_reset='latest',           # ✅ SOLO MENSAJES NUEVOS
-    enable_auto_commit=True,
-    group_id='felicidad-group-v3'        # ⚠️ NUEVO GRUPO PARA EVITAR OFFSET ANTIGUOS
+    auto_offset_reset='latest',          
+    group_id='felicidad-group-v3'        
 )
 
 print("🟢 Consumer conectado a Kafka y MySQL. Esperando datos...\n")
